@@ -48,7 +48,16 @@ dl_tar_gz_fre()
     mkdir "$1"
     cd "$1"
 
-    curl -o tmp.tar.gz -L $2
+    curl -o tmp.tar.gz -L $2 || true
+    curl -o tmp.tar.gz -L $2 || true
+    curl -o tmp.tar.gz -L $2 || true
+    curl -o tmp.tar.gz -L $2 || true
+    curl -o tmp.tar.gz -L $2 || true
+    curl -o tmp.tar.gz -L $2 || true
+    curl -o tmp.tar.gz -L $2 || true
+    curl -o tmp.tar.gz -L $2 || true
+    curl -o tmp.tar.gz -L $2 || true
+    curl -o tmp.tar.gz -L $2 || true
     tar -xzvf tmp.tar.gz --strip-components=1
     rm tmp.tar.gz
 
