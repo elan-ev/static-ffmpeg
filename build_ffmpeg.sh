@@ -336,7 +336,8 @@ compile_with_configure lame \
 # compile fribidi (dependency of libass)
 compile_with_autogen   fribidi \
                        --bindir=$OUT_BIN \
-                       --disable-shared
+                       --disable-shared \
+                       --disable-docs
 
 compile_with_autogen   libass \
                        --bindir=$OUT_BIN \
