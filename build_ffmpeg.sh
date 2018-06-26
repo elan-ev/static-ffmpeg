@@ -265,6 +265,8 @@ mkdir -p $SRC
 
 # get source
 cd $SRC
+dl_tar_gz_fre  lame      http://downloads.sourceforge.net/project/lame/lame/3.100/lame-3.100.tar.gz
+
 git_get_fresh  ffmpeg                     https://git.ffmpeg.org/ffmpeg.git
 git_get_frver  nasm         nasm-2.13.03  http://repo.or.cz/nasm.git
 git_get_fresh  yasm                       git://github.com/yasm/yasm.git
@@ -288,7 +290,6 @@ git_get_fresh  libvidstab                 https://github.com/georgmartius/vid.st
 git_get_fresh  libwebp                    https://chromium.googlesource.com/webm/libwebp
 git_get_fresh  ffnvcodec                  https://git.videolan.org/git/ffmpeg/nv-codec-headers.git
 
-dl_tar_gz_fre  lame      http://downloads.sourceforge.net/project/lame/lame/3.100/lame-3.100.tar.gz
 dl_tar_gz_fre  xvidcore  https://downloads.xvid.com/downloads/xvidcore-1.3.5.tar.gz
 cd $WD
 
