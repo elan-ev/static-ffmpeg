@@ -269,6 +269,23 @@ compile_c2man()
     cd $CURRENT_DIR
 }
 
+patch_librubberband()
+{
+    local CURRENT_DIR
+    CURRENT_DIR=$(pwd)
+
+    cd $OUT_PKG_CONFIG
+
+    echo "PATCHING librubberband"
+
+    cp $1/rubberband.pc .
+
+    sed -e 's/^Libs: -L${libdir} -lrubberband$/Libs: -L${libdir} -lrubberband/' rubberband.pc > rubberband.pc.tmp
+    mv rubberband.pc.tmp rubberband.pc
+
+    cd $CURRENT_DIR
+}
+
 
 
 # set path vars
