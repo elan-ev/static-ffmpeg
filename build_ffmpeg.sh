@@ -280,7 +280,7 @@ patch_librubberband()
 
     cp $1/rubberband.pc .
 
-    sed -e 's/^Libs: -L${libdir} -lrubberband$/Libs: -L${libdir} -lrubberband/' rubberband.pc > rubberband.pc.tmp
+    sed -e 's/^Libs: -L${libdir} -lrubberband$/Libs: -L${libdir} -lrubberband -lfftw3/' rubberband.pc > rubberband.pc.tmp
     mv rubberband.pc.tmp rubberband.pc
 
     cd $CURRENT_DIR
@@ -337,6 +337,9 @@ git_get_fresh  c2man                      https://github.com/fribidi/c2man.git
 dl_tar_gz_fre  lame      http://downloads.sourceforge.net/project/lame/lame/3.100/lame-3.100.tar.gz
 dl_tar_gz_fre  xvidcore  https://downloads.xvid.com/downloads/xvidcore-1.3.5.tar.gz
 cd $WD
+
+
+patch_librubberband  /usr/lib/x86_64-linux-gnu/pkgconfig
 
 
 
