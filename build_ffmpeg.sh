@@ -280,7 +280,7 @@ patch_librubberband()
 
     cp $1/rubberband.pc .
 
-    sed -e 's/^Libs: -L${libdir} -lrubberband$/Libs: -L${libdir} -lrubberband -lfftw3/' rubberband.pc > rubberband.pc.tmp
+    sed -e 's/^Libs: -L${libdir} -lrubberband$/Libs: -L${libdir} -lrubberband -lfftw3 -lsamplerate/' rubberband.pc > rubberband.pc.tmp
     mv rubberband.pc.tmp rubberband.pc
 
     cd $CURRENT_DIR
