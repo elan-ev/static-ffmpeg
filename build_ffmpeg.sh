@@ -2,7 +2,7 @@
 
 # DEPENDENCIES-BASE: git, mercurial, curl, tar, gcc, g++, make, libtool, automake, autoconf, pkg-config, cmake, bison, flex
 # DEPENDENCIES?: libexpat, libpng
-# DEPENDENCIES: libfontconfig-devel, libfreetype2-devel, libbz2-devel, librubberband-devel, libfftw3-devel
+# DEPENDENCIES: libfontconfig-devel, libfreetype2-devel, libbz2-devel, librubberband-devel, libfftw3-devel, libsamplerate0-devel
 
 set -u
 set -e
@@ -269,6 +269,23 @@ compile_c2man()
     cd $CURRENT_DIR
 }
 
+patch_librubberband()
+{
+    local CURRENT_DIR
+    CURRENT_DIR=$(pwd)
+
+    cd $OUT_PKG_CONFIG
+
+    echo "PATCHING librubberband"
+
+    cp $1/rubberband.pc .
+
+    sed -e 's/^Libs: -L${libdir} -lrubberband$/Libs: -L${libdir} -lrubberband -lfftw3 -lsamplerate/' rubberband.pc > rubberband.pc.tmp
+    mv rubberband.pc.tmp rubberband.pc
+
+    cd $CURRENT_DIR
+}
+
 
 
 # set path vars
@@ -285,6 +302,7 @@ export PKG_CONFIG_PATH=$OUT_PKG_CONFIG
 rm -rf $OUT_PREFIX
 rm -rf $OUT_BIN
 
+mkdir -p $OUT_PKG_CONFIG
 mkdir -p $OUT_PREFIX
 mkdir -p $OUT_BIN
 mkdir -p $SRC
@@ -319,6 +337,9 @@ git_get_fresh  c2man                      https://github.com/fribidi/c2man.git
 dl_tar_gz_fre  lame      http://downloads.sourceforge.net/project/lame/lame/3.100/lame-3.100.tar.gz
 dl_tar_gz_fre  xvidcore  https://downloads.xvid.com/downloads/xvidcore-1.3.5.tar.gz
 cd $WD
+
+
+patch_librubberband  /usr/lib/x86_64-linux-gnu/pkgconfig
 
 
 
@@ -430,6 +451,7 @@ compile_with_configure ffmpeg \
                        --enable-libfreetype \
                        --enable-libfribidi \
                        --enable-frei0r \
+                       --enable-librubberband \
                        --enable-avfilter \
                        --enable-avresample \
                        --enable-bzlib \
