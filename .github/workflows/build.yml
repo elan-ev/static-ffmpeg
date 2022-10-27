@@ -2,6 +2,7 @@ name: Build FFmpeg
 
 # On push and every Monday at 2:32 am
 on:
+  workflow_dispatch:
   push:
   schedule:
     - cron: '32 2 * * 1'
