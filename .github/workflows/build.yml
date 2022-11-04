@@ -12,7 +12,7 @@ jobs:
     name: build ffmpeg
     runs-on: ubuntu-latest
     container:
-      image: docker.io/library/alpine:20210804
+      image: docker.io/library/alpine:20220715
     steps:
       - uses: actions/checkout@v2
 

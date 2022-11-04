@@ -57,6 +57,7 @@ apk add alpine-sdk \
 	sudo \
 	gtk-doc \
 	libtasn1 \
-	libtasn1-progs
+	libtasn1-progs \
+	vamp-sdk-dev
 
 echo "DONE"
