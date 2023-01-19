@@ -1,8 +1,13 @@
 #!/bin/bash
 
-# DEPENDENCIES-BASE: git mercurial curl wget tar gcc make libtool automake autoconf autogen pkg-config cmake bison flex gperf gettext texinfo texlive cargo
-# DEPENDENCIES Ubuntu_Debian: autopoint libfontconfig-dev libfreetype-dev libbz2-dev librubberband-dev libfftw3-dev libsamplerate0-dev libgmp-dev libexpat-dev libpng-dev g++
-# DEPENDENCIES_Centos_Fedora: fontconfig-devel freetype-devel bzip2-devel rubberband-devel fftw3-devel libsamplerate-devel gmp-devel expat-devel libpng-devel byacc gcc-c++
+# DEPENDENCIES Ubuntu_Debian: 
+#apt-get -y install git mercurial curl wget tar gcc make libtool automake autoconf autogen pkg-config cmake
+#apt-get -y install  bison flex gperf gettext texinfo texlive yasm nasm
+#apt-get -y autopoint libfontconfig-dev libfreetype-dev libbz2-dev librubberband-dev libfftw3-dev libsamplerate0-dev libgmp-dev libexpat-dev libpng-dev g++
+# DEPENDENCIES_Centos_Fedora: 
+#dnf -y install git mercurial curl wget tar gcc make libtool automake autoconf autogen pkg-config cmake
+#dnf -y install  bison flex gperf gettext texinfo texlive yasm nasm
+#dnf -y install fontconfig-devel freetype-devel bzip2-devel rubberband-devel fftw3-devel libsamplerate-devel gmp-devel expat-devel libpng-devel byacc gcc-c++
 
 set -u
 set -e
@@ -450,7 +455,7 @@ compile_with_cmake_sp  libaom-av1 build .. \
 
 compile_svtav1         svt_av1
 
-compile_rav1e          rav1e
+#compile_rav1e          rav1e
 
 compile_with_autogen   libopus \
                        --disable-shared
@@ -555,7 +560,6 @@ compile_with_configure ffmpeg \
                        --enable-libspeex \
                        --enable-libaom \
                        --enable-libsvtav1 \
-                       --enable-librav1e \
                        --enable-network \
                        --enable-libtheora \
                        --enable-libsoxr \
@@ -579,3 +583,4 @@ compile_with_configure ffmpeg \
                        --enable-gnutls
 
 echo "DONE"
+#                       --enable-librav1e \
