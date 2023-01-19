@@ -68,6 +68,7 @@ cmake_src()
           -DCMAKE_BUILD_TYPE=Release \
           -DCMAKE_INSTALL_PREFIX=$OUT_PREFIX \
           "${@:2}"
+    echo "CMAKE $1"
 }
 
 cmake_sp_src()
@@ -84,6 +85,7 @@ cmake_sp_src()
           -DCMAKE_BUILD_TYPE=Release \
           -DCMAKE_INSTALL_PREFIX=$OUT_PREFIX \
           "${@:3}"
+    echo "CMAKE $1"
 }
 
 make_src()
@@ -92,6 +94,7 @@ make_src()
 
     make -j"${CPU_CORES}"
     make install
+    echo "MAKE $1"
 }
 
 make_iie_src() # ignore install error
@@ -100,6 +103,7 @@ make_iie_src() # ignore install error
 
     make -j"${CPU_CORES}"
     make install || true
+    echo "MAKE $1"
 }
 
 compile_with_configure()
