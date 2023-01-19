@@ -10,7 +10,7 @@
 #dnf -y install  bison flex gperf gettext texinfo texlive yasm nasm
 #dnf -y install fontconfig-devel freetype-devel bzip2-devel rubberband-devel fftw3-devel 
 #dnf -y install libsamplerate-devel gmp-devel expat-devel libpng-devel byacc gcc-c++
-#dnf -y install libtool-ltdl-devel libunistring-devel gc-devel
+#dnf -y install libtool-ltdl-devel libunistring-devel gc-devel gettex-devel
 
 set -u
 set -e
