@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# DEPENDENCIES-BASE: git, mercurial, curl, wget, tar, gcc, g++, make, libtool, automake, autoconf, autogen, pkg-config, cmake, bison, flex, gperf, gettext, autopoint texinfo texlive
-# DEPENDENCIES?: libexpat, libpng
-# DEPENDENCIES: libfontconfig-devel, libfreetype2-devel, libbz2-devel, librubberband-devel, libfftw3-devel, libsamplerate0-devel, libgmp-devel
+# DEPENDENCIES-BASE: git mercurial curl wget tar gcc g++ make libtool automake autoconf autogen pkg-config cmake bison flex gperf gettext autopoint texinfo texlive cargo
+# DEPENDENCIES?: libexpat libpng
+# DEPENDENCIES: libfontconfig-devel, libfreetype2-devel, libbz2-devel, librubberband-devel, libfftw3-devel, libsamplerate0-devel, libgmp-devel cargo
 
 set -u
 set -e
@@ -320,6 +320,7 @@ compile_rav1e()
 
     cd "$SRC/$1"
 
+    #build require package cargo
     echo "install cargo-c (for rav1e)"
     cargo install --root="$OUT_PREFIX" -j"${CPU_CORES}" cargo-c
 
