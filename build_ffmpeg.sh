@@ -104,6 +104,7 @@ make_iie_src() # ignore install error
 
 compile_with_configure()
 {
+if [ -d "$SRC/$1" ]; then    
     local CURRENT_DIR
     CURRENT_DIR=$(pwd)
 
@@ -113,10 +114,13 @@ compile_with_configure()
     make_src "$1"
 
     cd $CURRENT_DIR
+    rm -rf $SRC/$1
+fi    
 }
 
 compile_with_config_sp() # subpath, not necessarily needed
 {
+if [ -d "$SRC/$1" ]; then 
     local CURRENT_DIR
     CURRENT_DIR=$(pwd)
 
@@ -127,10 +131,13 @@ compile_with_config_sp() # subpath, not necessarily needed
     make_src "$1"
 
     cd $CURRENT_DIR
+    rm -rf $SRC/$1
+fi
 }
 
 compile_with_config()
 {
+if [ -d "$SRC/$1" ]; then 
     local CURRENT_DIR
     CURRENT_DIR=$(pwd)
 
@@ -140,10 +147,13 @@ compile_with_config()
     make_src "$1"
 
     cd $CURRENT_DIR
+    rm -rf $SRC/$1
+fi
 }
 
 compile_with_autogen()
 {
+if [ -d "$SRC/$1" ]; then
     local CURRENT_DIR
     CURRENT_DIR=$(pwd)
 
@@ -154,10 +164,13 @@ compile_with_autogen()
     make_src "$1"
 
     cd $CURRENT_DIR
+    rm -rf $SRC/$1
+fi
 }
 
 compile_with_bootstrap()
 {
+if [ -d "$SRC/$1" ]; then
     local CURRENT_DIR
     CURRENT_DIR=$(pwd)
 
@@ -168,10 +181,13 @@ compile_with_bootstrap()
     make_src "$1"
 
     cd $CURRENT_DIR
+    rm -rf $SRC/$1
+fi
 }
 
 compile_with_dot_bstrp()
 {
+if [ -d "$SRC/$1" ]; then
     local CURRENT_DIR
     CURRENT_DIR=$(pwd)
 
@@ -182,10 +198,13 @@ compile_with_dot_bstrp()
     make_src "$1"
 
     cd $CURRENT_DIR
+    rm -rf $SRC/$1
+fi
 }
 
 compile_with_autog_iie()
 {
+if [ -d "$SRC/$1" ]; then
     local CURRENT_DIR
     CURRENT_DIR=$(pwd)
 
@@ -196,10 +215,13 @@ compile_with_autog_iie()
     make_iie_src "$1"
 
     cd $CURRENT_DIR
+    rm -rf $SRC/$1
+fi
 }
 
 compile_with_cmake()
 {
+if [ -d "$SRC/$1" ]; then
     local CURRENT_DIR
     CURRENT_DIR=$(pwd)
 
@@ -209,9 +231,12 @@ compile_with_cmake()
     make_src "$1"
 
     cd $CURRENT_DIR
+    rm -rf $SRC/$1
+fi
 }
 compile_with_cmake_sp()
 {
+if [ -d "$SRC/$1" ]; then
     local CURRENT_DIR
     CURRENT_DIR=$(pwd)
 
@@ -223,10 +248,13 @@ compile_with_cmake_sp()
     make_src "$1"
 
     cd $CURRENT_DIR
+    rm -rf $SRC/$1
+fi
 }
 
 compile_ffnvcodec()
 {
+if [ -d "$SRC/$1" ]; then
     local CURRENT_DIR
     CURRENT_DIR=$(pwd)
 
@@ -237,10 +265,13 @@ compile_ffnvcodec()
     make install PREFIX=$OUT_PREFIX
 
     cd $CURRENT_DIR
+    rm -rf $SRC/$1
+fi
 }
 
 compile_c2man()
 {
+if [ -d "$SRC/$1" ]; then
     local CURRENT_DIR
     CURRENT_DIR=$(pwd)
 
@@ -264,10 +295,13 @@ compile_c2man()
     make install
 
     cd $CURRENT_DIR
+    rm -rf $SRC/$1
+fi
 }
 
 compile_alsa()
 {
+if [ -d "$SRC/$1" ]; then
     local CURRENT_DIR
     CURRENT_DIR=$(pwd)
 
@@ -291,10 +325,13 @@ compile_alsa()
     make install
 
     cd $CURRENT_DIR
+    rm -rf $SRC/$1
+fi
 }
 
 compile_svtav1()
 {
+if [ -d "$SRC/$1" ]; then
     local CURRENT_DIR
     CURRENT_DIR=$(pwd)
 
@@ -311,10 +348,13 @@ compile_svtav1()
         install
 
     cd $CURRENT_DIR
+    rm -rf $SRC/$1
+fi
 }
 
 compile_rav1e()
 {
+if [ -d "$SRC/$1" ]; then
     local CURRENT_DIR
     CURRENT_DIR=$(pwd)
 
@@ -333,6 +373,8 @@ compile_rav1e()
     sed -i "s/ -lgcc_s / /g" "$OUT_PREFIX/lib/pkgconfig/rav1e.pc"
 
     cd $CURRENT_DIR
+    rm -rf $SRC/$1
+fi
 }
 
 # get cpu count
@@ -357,9 +399,9 @@ OUT_PKG_CONFIG=$OUT_PREFIX/lib/pkgconfig
 
 export PATH="$OUT_BIN:$PATH"
 export PKG_CONFIG_PATH=$OUT_PKG_CONFIG
-export CFLAGS="${CFLAGS-} -march=x86-64 -mtune=generic"
-export CXXFLAGS="${CXXFLAGS-} $CFLAGS"
-export LDFLAGS="${LDFLAGS-}"
+#export CFLAGS="${CFLAGS-} -march=x86-64 -mtune=generic"
+#export CXXFLAGS="${CXXFLAGS-} $CFLAGS"
+#export LDFLAGS="${LDFLAGS-}"
 # export CC="gcc"
 # export CXX="g++"
 
@@ -395,8 +437,8 @@ compile_with_configure libx264 \
                        --enable-pic \
                        --bit-depth=all
 
-CFLAGS="$CFLAGS -static-libgcc" \
-CXXFLAGS="$CXXFLAGS -static-libgcc -static-libstdc++" \
+#CFLAGS="$CFLAGS -static-libgcc" \
+#CXXFLAGS="$CXXFLAGS -static-libgcc -static-libstdc++" \
 compile_with_cmake_sp  libx265 build/linux ../../source \
                        -DENABLE_SHARED:bool=off
 
