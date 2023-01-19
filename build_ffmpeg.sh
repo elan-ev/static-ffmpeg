@@ -366,10 +366,10 @@ if [ -d "$SRC/$1" ]; then
 
     #build require package cargo
     echo "install cargo-c (for rav1e)"
-    cargo install --root="$OUT_PREFIX" -j"${CPU_CORES}" cargo-c --locked cargo
+    RUST_BACKTRACE=1 cargo install --root="$OUT_PREFIX" -j"${CPU_CORES}" cargo-c --locked cargo
     echo "rav1e BUILD $1"
-    PATH="$OUT_PREFIX/bin:$PATH" cargo build -j"${CPU_CORES}" --release
-    PATH="$OUT_PREFIX/bin:$PATH" cargo cinstall -j"${CPU_CORES}" --release \
+    PATH="$OUT_PREFIX/bin:$PATH" RUST_BACKTRACE=1 cargo build -j"${CPU_CORES}" --release
+    PATH="$OUT_PREFIX/bin:$PATH" RUST_BACKTRACE=1 cargo cinstall -j"${CPU_CORES}" --release \
           --prefix="$OUT_PREFIX"
 
     echo "FIX rav1e.pc file" # Hack
