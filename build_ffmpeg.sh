@@ -506,7 +506,7 @@ compile_with_cmake     libvidstab \
 compile_with_autogen   libwebp \
                        --disable-shared
 
-compile_with_autogen   frei0r
+compile_with_cmake   frei0r
 
 compile_ffnvcodec      ffnvcodec
 
