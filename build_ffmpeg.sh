@@ -479,9 +479,9 @@ compile_with_configure lame \
                        --disable-shared \
                        --enable-nasm
 
-compile_with_autogen   fribidi \
-                       --bindir=$OUT_BIN \
-                       --disable-shared
+#compile_with_autogen   fribidi \
+#                       --bindir=$OUT_BIN \
+#                       --disable-shared
 
 compile_with_cmake     libopenjpeg \
                        -DBUILD_SHARED_LIBS=OFF
@@ -567,7 +567,6 @@ compile_with_configure ffmpeg \
                        --enable-libvidstab \
                        --enable-libwebp \
                        --enable-libfreetype \
-                       --enable-libfribidi \
                        --enable-frei0r \
                        --enable-librubberband \
                        --enable-avfilter \
@@ -584,3 +583,4 @@ compile_with_configure ffmpeg \
 
 echo "DONE"
 #                       --enable-librav1e \
+#                       --enable-libfribidi \
