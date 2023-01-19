@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# DEPENDENCIES-BASE: git, mercurial, curl, wget, tar, gcc, g++, make, libtool, automake, autoconf, autogen, pkg-config, cmake, bison, flex, gperf, gettext, autopoint texinfo texlive
-# DEPENDENCIES?: libexpat, libpng
-# DEPENDENCIES: libfontconfig-devel, libfreetype2-devel, libbz2-devel, librubberband-devel, libfftw3-devel, libsamplerate0-devel, libgmp-devel
+# DEPENDENCIES-BASE: git mercurial curl wget tar gcc g++ make libtool automake autoconf autogen pkg-config cmake bison flex gperf gettext autopoint texinfo texlive cargo
+# DEPENDENCIES?: libexpat libpng
+# DEPENDENCIES: libfontconfig-devel, libfreetype2-devel, libbz2-devel, librubberband-devel, libfftw3-devel, libsamplerate0-devel, libgmp-devel cargo
 
 set -u
 set -e
