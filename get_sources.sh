@@ -1,8 +1,9 @@
 #!/bin/bash
 
-# DEPENDENCIES-BASE: git mercurial curl wget tar gcc g++ make libtool automake autoconf autogen pkg-config cmake bison flex gperf gettext autopoint texinfo texlive cargo
-# DEPENDENCIES?: libexpat libpng
-# DEPENDENCIES: libfontconfig-devel, libfreetype2-devel, libbz2-devel, librubberband-devel, libfftw3-devel, libsamplerate0-devel, libgmp-devel cargo
+# DEPENDENCIES-BASE: git mercurial curl wget tar gcc g++ make libtool automake autoconf autogen pkg-config cmake bison flex gperf gettext texinfo texlive cargo
+# DEPENDENCIES Ubuntu_Debian: autopoint libfontconfig-dev libfreetype-dev libbz2-dev librubberband-dev libfftw3-dev libsamplerate0-dev libgmp-dev libexpat-dev libpng-dev
+# DEPENDENCIES_Centos_Fedora: fontconfig-devel freetype-devel bzip2-devel rubberband-devel fftw3-devel libsamplerate-devel gmp-devel expat-devel libpng-devel
+
 
 set -u
 set -e
