@@ -406,7 +406,7 @@ SRC=$WD/src
 
 OUT_PREFIX=$WD/ffmpeg_build
 OUT_BIN=$WD/ffmpeg_bin
-OUT_PKG_CONFIG=$OUT_PREFIX/lib/pkgconfig
+OUT_PKG_CONFIG=$OUT_PREFIX/lib/pkgconfig:$OUT_PREFIX/lib64/pkgconfig
 
 export PATH="$OUT_BIN:$PATH"
 export PKG_CONFIG_PATH=$OUT_PKG_CONFIG
