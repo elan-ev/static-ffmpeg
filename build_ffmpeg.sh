@@ -366,7 +366,7 @@ if [ -d "$SRC/$1" ]; then
 
     #build require package cargo
     echo "install cargo-c (for rav1e)"
-    cargo install --root="$OUT_PREFIX" -j"${CPU_CORES}" cargo-c
+    cargo install --root="$OUT_PREFIX" -j"${CPU_CORES}" --locked cargo-c
 
     echo "rav1e BUILD $1"
     PATH="$OUT_PREFIX/bin:$PATH" cargo build -j"${CPU_CORES}" --release
