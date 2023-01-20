@@ -6,7 +6,7 @@
 #apt-get -y install  bison flex gperf gettext texinfo texlive yasm nasm gtk-doc-tools libtasn1-6-dev
 #apt-get -y install autopoint libfontconfig-dev libfreetype-dev libbz2-dev librubberband-dev libfftw3-dev
 #apt-get -y install libsamplerate0-dev libgmp-dev libexpat-dev libpng-dev g++ libunistring-dev libgc-dev
-#apt-get -y install g++-multilib libopus-dev libvorbis-dev libass-dev libfreetype6-dev nettle-dev
+#apt-get -y install g++-multilib libopus-dev libvorbis-dev libass-dev libfreetype6-dev nettle-dev ca-certificates
 #apt-get -y install libgnutls28-dev libmp3lame-dev libsdl2-dev libva-dev libvdpau-dev libxcb1-dev
 #apt-get -y install libxcb-shm0-dev libxcb-xfixes0-dev meson ninja-build zlib1g-dev libxvidcore-dev
 #apt-get -y install libx264-dev libx265-dev libnuma-dev libvpx-dev libfdk-aac-dev unzip librtmp-dev
@@ -15,7 +15,7 @@
 #for centos and fedora rpmfusion-free-release rpmfusion-nonfree-release
 #https://rpmfusion.org/Configuration/
 # DEPENDENCIES_Centos_Fedora: 
-#dnf -y install git mercurial curl wget tar gcc make libtool automake autoconf autogen pkgconfig cmake
+#dnf -y install git mercurial curl wget tar gcc make libtool automake autoconf autogen pkgconfig cmake ca-certificates
 #dnf -y install  bison flex gperf gettext texinfo texlive yasm nasm gtk-doc libtasn1-devel opus-devel
 #dnf -y install fontconfig-devel freetype-devel bzip2 bzip2-devel rubberband-devel fftw3-devel lame-devel
 #dnf -y install libsamplerate-devel gmp-devel expat-devel libpng-devel byacc gcc-c++ svt-av1-devel libwebp-devel
