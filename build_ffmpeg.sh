@@ -12,7 +12,7 @@
 #dnf -y install fontconfig-devel freetype-devel bzip2-devel rubberband-devel fftw3-devel lame-devel
 #dnf -y install libsamplerate-devel gmp-devel expat-devel libpng-devel byacc gcc-c++ libaom-devel svt-av1-devel
 #dnf -y install libtool-ltdl-devel libunistring-devel gc-devel gettext-devel libstdc++-devel.i686 libstdc++-devel
-#dnf -y install vorbis-devel
+#dnf -y install libvorbis-devel
 
 set -u
 set -e
