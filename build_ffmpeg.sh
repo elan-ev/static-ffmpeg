@@ -415,6 +415,8 @@ export PKG_CONFIG_PATH=$OUT_PKG_CONFIG
 #export CFLAGS="${CFLAGS-} -march=x86-64 -mtune=generic"
 #export CXXFLAGS="${CXXFLAGS-} $CFLAGS"
 #export LDFLAGS="${LDFLAGS-}"
+export CFLAGS="$CFLAGS -I$OUT_PREFIX/include -L$OUT_PREFIX/lib -L$OUT_PREFIX/lib64"
+export LD_LIBRARY_PATH="$OUT_PREFIX/lib:$OUT_PREFIX/lib64:$LD_LIBRARY_PATH"
 # export CC="gcc"
 # export CXX="g++"
 
@@ -454,6 +456,23 @@ compile_with_configure libx264 \
 #CXXFLAGS="$CXXFLAGS -static-libgcc -static-libstdc++" \
 compile_with_cmake_sp  libx265 build/linux ../../source \
                        -DENABLE_SHARED:bool=off
+if [ ! -f $OUT_PREFIX/lib/pkgconfig/x265.pc ]
+then
+mkdir -p $OUT_PREFIX/lib/pkgconfig/
+cat > $OUT_PREFIX/lib/pkgconfig/x265.pc <<EOF
+prefix=$OUT_PREFIX
+exec_prefix=\${prefix}
+libdir=\${exec_prefix}/lib
+includedir=\${prefix}/include
+
+Name: x265
+Description: H.265/HEVC video encoder
+Version: 3.5
+Libs: -L\${libdir} -lx265
+Libs.private: -lstdc++ -lm -lrt -ldl
+Cflags: -I\${includedir}
+EOF
+fi
 
 compile_with_cmake_sp  libaom-av1 build .. \
                        -DBUILD_SHARED_LIBS=0
