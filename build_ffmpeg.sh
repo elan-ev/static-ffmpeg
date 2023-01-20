@@ -1,18 +1,27 @@
 #!/bin/bash
-
+# for ubuntu enable component multiverse and universe and dêpot update and security
+# for debian enable component contrib non-free and dépot update security backport and debian multimedia
 # DEPENDENCIES Ubuntu_Debian: 
-#apt-get -y install git mercurial curl wget tar gcc make libtool automake autoconf autogen pkg-config cmake
-#apt-get -y install  bison flex gperf gettext texinfo texlive yasm nasm gtk-doc libtasn1-6-dev libaom-dev
+#apt-get -y install git mercurial curl wget tar gcc make libtool automake autoconf autogen build-essential pkg-config cmake
+#apt-get -y install  bison flex gperf gettext texinfo texlive yasm nasm gtk-doc-tools libtasn1-6-dev
 #apt-get -y install autopoint libfontconfig-dev libfreetype-dev libbz2-dev librubberband-dev libfftw3-dev
-#apt-get -y install libsamplerate0-dev libgmp-dev libexpat-dev libpng-dev g++ libunistring-dev libgc-dev lame-dev
-#apt-get -y install g++-multilib libopus-dev libsvtav1enc1 libvorbis-dev
+#apt-get -y install libsamplerate0-dev libgmp-dev libexpat-dev libpng-dev g++ libunistring-dev libgc-dev
+#apt-get -y install g++-multilib libopus-dev libvorbis-dev libass-dev libfreetype6-dev nettle-dev
+#apt-get -y install libgnutls28-dev libmp3lame-dev libsdl2-dev libva-dev libvdpau-dev libxcb1-dev
+#apt-get -y install libxcb-shm0-dev libxcb-xfixes0-dev meson ninja-build zlib1g-dev libxvidcore-dev
+#apt-get -y install libx264-dev libx265-dev libnuma-dev libvpx-dev libfdk-aac-dev unzip librtmp-dev
+#apt-get -y install libtheora-dev libssl-dev zip subversion checkinstall libogg-dev libwebp-dev
+#for centos enable epel-release
+#for centos and fedora rpmfusion-free-release rpmfusion-nonfree-release
+#https://rpmfusion.org/Configuration/
 # DEPENDENCIES_Centos_Fedora: 
-#dnf -y install git mercurial curl wget tar gcc make libtool automake autoconf autogen pkg-config cmake
+#dnf -y install git mercurial curl wget tar gcc make libtool automake autoconf autogen pkgconfig cmake
 #dnf -y install  bison flex gperf gettext texinfo texlive yasm nasm gtk-doc libtasn1-devel opus-devel
-#dnf -y install fontconfig-devel freetype-devel bzip2-devel rubberband-devel fftw3-devel lame-devel
-#dnf -y install libsamplerate-devel gmp-devel expat-devel libpng-devel byacc gcc-c++ libaom-devel svt-av1-devel
+#dnf -y install fontconfig-devel freetype-devel bzip2 bzip2-devel rubberband-devel fftw3-devel lame-devel
+#dnf -y install libsamplerate-devel gmp-devel expat-devel libpng-devel byacc gcc-c++ svt-av1-devel libwebp-devel
 #dnf -y install libtool-ltdl-devel libunistring-devel gc-devel gettext-devel libstdc++-devel.i686 libstdc++-devel
-#dnf -y install libvorbis-devel
+#dnf -y install libvorbis-devel zlib-devel libass-devel gnutls-devel gnutls librtmp-devel x264-devel libogg-devel
+#dnf -y install x265-devel libvpx-devel xvidcore-devel openssl-devel unzip zip libtheora-devel fdk-aac-devel nettle-devel
 
 set -u
 set -e
@@ -433,8 +442,8 @@ mkdir -p $SRC
 cd $WD
 
 
-compile_with_autog_iie nasm \
-                       --bindir=$OUT_BIN
+#compile_with_autog_iie nasm \
+#                       --bindir=$OUT_BIN
 
 # compile_with_autogen   yasm \
 #                        --bindir=$OUT_BIN
@@ -446,11 +455,11 @@ hash -r
 
 compile_alsa           alsa
 
-compile_with_configure libx264 \
-                       --bindir=$OUT_BIN \
-                       --enable-static \
-                       --enable-pic \
-                       --bit-depth=all
+#compile_with_configure libx264 \
+#                       --bindir=$OUT_BIN \
+#                       --enable-static \
+#                       --enable-pic \
+#                       --bit-depth=all
 
 #CFLAGS="$CFLAGS -static-libgcc" \
 #CXXFLAGS="$CXXFLAGS -static-libgcc -static-libstdc++" \
@@ -481,27 +490,27 @@ compile_svtav1         svt_av1
 
 #compile_rav1e          rav1e
 
-compile_with_autogen   libopus \
-                       --disable-shared
+#compile_with_autogen   libopus \
+#                       --disable-shared
 
 # compile libogg (dependency of libvorbis)
-compile_with_autogen   libogg \
-                       --disable-shared
+#compile_with_autogen   libogg \
+#                       --disable-shared
 
-compile_with_autogen   libvorbis \
-                       --with-ogg=$OUT_PREFIX \
-                       --disable-shared
+#compile_with_autogen   libvorbis \
+#                       --with-ogg=$OUT_PREFIX \
+#                       --disable-shared
 
-compile_with_configure libvpx \
-                       --disable-examples \
-                       --disable-unit-tests \
-                       --enable-vp9-highbitdepth \
-                       --as=yasm
+#compile_with_configure libvpx \
+#                       --disable-examples \
+#                       --disable-unit-tests \
+#                       --enable-vp9-highbitdepth \
+#                       --as=yasm
 
-compile_with_configure lame \
-                       --bindir=$OUT_BIN \
-                       --disable-shared \
-                       --enable-nasm
+#compile_with_configure lame \
+#                       --bindir=$OUT_BIN \
+#                       --disable-shared \
+#                       --enable-nasm
 
 #compile_with_autogen   fribidi \
 #                       --bindir=$OUT_BIN \
@@ -519,24 +528,24 @@ compile_with_cmake     libsoxr \
 compile_with_autogen   libspeex \
                        --disable-shared
 
-compile_with_autogen   libtheora \
-                       --disable-shared
+#compile_with_autogen   libtheora \
+#                       --disable-shared
 
-compile_with_config_sp xvidcore build/generic
+#compile_with_config_sp xvidcore build/generic
 
 compile_with_cmake     libvidstab \
                        -DBUILD_SHARED_LIBS=OFF
 
-compile_with_autogen   libwebp \
-                       --disable-shared
+#compile_with_autogen   libwebp \
+#                       --disable-shared
 
 compile_with_cmake   frei0r
 
 compile_ffnvcodec      ffnvcodec
 
-compile_with_dot_bstrp nettle \
-                       --bindir=$OUT_BIN \
-                       --disable-shared
+#compile_with_dot_bstrp nettle \
+#                       --bindir=$OUT_BIN \
+#                       --disable-shared
 
 # autogen for gnutls (autogen is not on alpine?)
 # as long as guile-3.0 is not supported by autogen, we cant use the system package
