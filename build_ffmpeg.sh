@@ -7,7 +7,7 @@
 #apt-get -y install autopoint libfontconfig-dev libfreetype-dev libbz2-dev librubberband-dev libfftw3-dev
 #apt-get -y install libsamplerate0-dev libgmp-dev libexpat-dev libpng-dev g++ libunistring-dev libgc-dev
 #apt-get -y install g++-multilib libopus-dev libvorbis-dev libass-dev libfreetype6-dev nettle-dev ca-certificates
-#apt-get -y install libgnutls28-dev libmp3lame-dev libsdl2-dev libva-dev libvdpau-dev libxcb1-dev
+#apt-get -y install libgnutls28-dev libmp3lame-dev libsdl2-dev libva-dev libvdpau-dev libxcb1-dev libltdl-dev
 #apt-get -y install libxcb-shm0-dev libxcb-xfixes0-dev meson ninja-build zlib1g-dev libxvidcore-dev
 #apt-get -y install libx264-dev libx265-dev libnuma-dev libvpx-dev libfdk-aac-dev unzip librtmp-dev
 #apt-get -y install libtheora-dev libssl-dev zip subversion checkinstall libogg-dev libwebp-dev
