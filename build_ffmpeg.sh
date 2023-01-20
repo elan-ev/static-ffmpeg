@@ -5,12 +5,13 @@
 #apt-get -y install  bison flex gperf gettext texinfo texlive yasm nasm gtk-doc libtasn1-6-dev
 #apt-get -y install autopoint libfontconfig-dev libfreetype-dev libbz2-dev librubberband-dev libfftw3-dev
 #apt-get -y install libsamplerate0-dev libgmp-dev libexpat-dev libpng-dev g++ libunistring-dev libgc-dev
+#apt-get -y install g++-multilib
 # DEPENDENCIES_Centos_Fedora: 
 #dnf -y install git mercurial curl wget tar gcc make libtool automake autoconf autogen pkg-config cmake
 #dnf -y install  bison flex gperf gettext texinfo texlive yasm nasm gtk-doc libtasn1-devel
 #dnf -y install fontconfig-devel freetype-devel bzip2-devel rubberband-devel fftw3-devel 
 #dnf -y install libsamplerate-devel gmp-devel expat-devel libpng-devel byacc gcc-c++
-#dnf -y install libtool-ltdl-devel libunistring-devel gc-devel gettext-devel 
+#dnf -y install libtool-ltdl-devel libunistring-devel gc-devel gettext-devel libstdc++-devel.i686 libstdc++-devel
 
 set -u
 set -e
