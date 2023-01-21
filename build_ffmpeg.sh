@@ -10,10 +10,13 @@ apt-get -y install libffi-dev libgc-dev gtk-doc-tools libtasn1-6-dev libtasn1-bi
 yum -y install epel-release
 yum -y install dnf
 dnf -y install git mercurial curl wget tar gcc gcc-c++ make libtool automake autoconf autogen pkgconfig cmake ca-certificates
-dnf -y install  bison flex gperf gettext texinfo texlive yasm nasm gtk-doc libtasn1-devel libstdc++-devel
+dnf -y install  bison flex gperf gettext texinfo texlive texlive-dejavu yasm nasm gtk-doc libtasn1-devel libstdc++-devel
 dnf -y install fontconfig-devel freetype-devel bzip2 bzip2-devel gmp-devel expat-devel libtool-ltdl-devel libunistring-devel gc-devel gettext-devel
-dnf -y install zlib-devel librtmp-devel fdk-aac-devel nettle-devel openssl-devel unzip zip subversion byacc binutils-devel
+dnf -y install zlib-devel librtmp-devel fdk-aac-devel nettle-devel openssl-devel unzip zip subversion byacc binutils-devel emacs-common-ess
+dnf -y install libedit-devel libxo-devel meson ncurses-devel ninja-build dash e2fsprogs-devel emacs-devel guile-devel
+dnf -y install docbook-simple docbook-slides docbook-utils-pdf gc-devel.i686 libstdc++-devel.i686 curl-devel
 dnf -y groupinstall 'Development Tools'
+
 #update install caro
 apt-get -y purge cargo
 dnf -y remove cargo
