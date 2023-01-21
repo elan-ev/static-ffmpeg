@@ -507,7 +507,7 @@ OUT_PKG_CONFIG=$OUT_PREFIX/lib/pkgconfig:$OUT_PREFIX/lib64/pkgconfig
 
 export PATH="$OUT_BIN:$OUT_PREFIX/bin:$PATH"
 export PKG_CONFIG_PATH=$OUT_PKG_CONFIG
-export CFLAGS="$CFLAGS -I$OUT_PREFIX/include -L$OUT_PREFIX/lib -L$OUT_PREFIX/lib64"
+export CFLAGS="-I$OUT_PREFIX/include -L$OUT_PREFIX/lib -L$OUT_PREFIX/lib64"
 export LD_LIBRARY_PATH="$OUT_PREFIX/lib:$OUT_PREFIX/lib64:$LD_LIBRARY_PATH"
 # export CC="gcc"
 # export CXX="g++"
