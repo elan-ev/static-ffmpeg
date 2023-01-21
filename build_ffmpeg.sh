@@ -14,7 +14,8 @@ dnf -y install  bison flex gperf gettext texinfo texlive texlive-dejavu yasm nas
 dnf -y install fontconfig-devel freetype-devel bzip2 bzip2-devel gmp-devel expat-devel libtool-ltdl-devel libunistring-devel gc-devel gettext-devel
 dnf -y install zlib-devel librtmp-devel fdk-aac-devel nettle-devel openssl-devel unzip zip subversion byacc binutils-devel emacs-common-ess
 dnf -y install libedit-devel libxo-devel meson ncurses-devel ninja-build dash e2fsprogs-devel emacs-devel guile-devel
-dnf -y install docbook-simple docbook-slides docbook-utils-pdf gc-devel.i686 libstdc++-devel.i686 curl-devel
+dnf -y install docbook-simple docbook-slides docbook-utils-pdf gc-devel.i686 libstdc++-devel.i686 curl-devel glibc-static glibc-static.i686
+dnf -y install glibc-devel glibc-devel.i686
 dnf -y groupinstall 'Development Tools'
 
 #update install caro
