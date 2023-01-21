@@ -1,14 +1,62 @@
 #!/bin/bash
-# for ubuntu enable component multiverse and universe and dêpot update and security
-# for debian enable component contrib non-free and dépot update security backport and debian multimedia
-# DEPENDENCIES Ubuntu_Debian: 
-apt-get -y install libssl-dev g++-multilib git mercurial curl wget ca-certificates tar gcc g++ make libtool automake zstd nettle-dev
-apt-get -y install autoconf autogen build-essential pkg-config cmake bison flex gperf gettext autopoint texinfo texlive nasm yasm libunistring-dev
-apt-get -y install libfontconfig-dev libfreetype-dev libbz2-dev librubberband-dev libsamplerate0-dev libgmp-dev libltdl-dev
-apt-get -y install libffi-dev libgc-dev gtk-doc-tools libtasn1-6-dev libtasn1-bin librtmp-dev libfdk-aac-dev subversion
-# DEPENDENCIES_Centos_Fedora: 
-yum -y install epel-release
+echo -e "\nChecking that minimal requirements are ok"
+# Ensure the OS is compatible with the launcher
+if [ -f /etc/centos-release ]; then
+    inst() {
+       rpm -q --queryformat '%{Version}-%{Release}' "$1"
+    } 
+    if (inst "centos-stream-repos"); then
+    OS="CentOS-Stream"
+    else
+    OS="CentOs"
+    fi    
+    VERFULL=$(sed 's/^.*release //;s/ (Fin.*$//' /etc/centos-release) VER=${VERFULL:0:1} # return 6, 7, 8, 9 etc
+elif [ -f /etc/fedora-release ]; then
+    inst() {
+       rpm -q --queryformat '%{Version}-%{Release}' "$1"
+    } 
+    OS="Fedora" VERFULL=$(sed 's/^.*release //;s/ (Fin.*$//' /etc/fedora-release) VER=${VERFULL:0:2} # return 34, 35, 36,37 etc
+elif [ -f /etc/lsb-release ]; then
+    OS=$(grep DISTRIB_ID /etc/lsb-release | sed 's/^.*=//') VER=$(grep DISTRIB_RELEASE /etc/lsb-release | sed 's/^.*=//')
+	inst() {
+       dpkg-query --showformat='${Version}' --show "$1"
+    }
+elif [ -f /etc/os-release ]; then
+    OS=$(grep -w ID /etc/os-release | sed 's/^.*=//') VER=$(grep VERSION_ID /etc/os-release | sed 's/^.*"\(.*\)"/\1/' | head -n 1 | tail -n 1)
+ else
+    OS=$(uname -s) VER=$(uname -r)
+fi
+ARCH=$(uname -m)
+echo "Detected : $OS  $VER  $ARCH"
+# this part must be updated every 6 months
+if [[ "$OS" = "CentOs" && "$VER" = "7" && "$ARCH" == "x86_64" || "$OS" = "CentOS-Stream" && "$VER" = "8" && "$ARCH" == "x86_64" ||
+"$OS" = "CentOS-Stream" && "$VER" = "9" && "$ARCH" == "x86_64" || "$OS" = "Fedora" && "$VER" = "35" && "$ARCH" == "x86_64" ||
+"$OS" = "Fedora" && "$VER" = "36" && "$ARCH" == "x86_64" || "$OS" = "Fedora" && "$VER" = "37" && "$ARCH" == "x86_64" ||
+"$OS" = "Ubuntu" && "$VER" = "18.04" && "$ARCH" == "x86_64" || "$OS" = "Ubuntu" && "$VER" = "20.04" && "$ARCH" == "x86_64" ||
+"$OS" = "Ubuntu" && "$VER" = "22.04" && "$ARCH" == "x86_64" || "$OS" = "debian" && "$VER" = "10" && "$ARCH" == "x86_64" ||
+"$OS" = "debian" && "$VER" = "11" && "$ARCH" == "x86_64" ]] ; then
+    echo "Ok."
+else
+    echo "Sorry, this OS is not supported."
+	echo "This script is online for Linux x86_64 Stable Version"
+	echo "Only aviable for :"
+	echo "Centos Version 7"
+	echo "CentOS Stream Version 8"
+	echo "CentOS Stream Version 9"
+	echo "Fedora Version 35"
+	echo "Fedora Version 36"
+	echo "Fedora Version 37"
+	echo "Ubuntu Version 18.04 (LTS)"
+	echo "Ubuntu Version 20.04 (LTS)"
+	echo "Ubuntu Version 22.04 (LTS)"
+	echo "Debian 10 (Old Stable)"
+	echo "Debian 11 (Stable)"
+    exit 1
+fi
+if [[ "$OS" = "CentOs" || "$OS" = "CentOS-Stream" ]] ; then
+yum -y install --nogpgcheck https://dl.fedoraproject.org/pub/epel/epel-release-latest-$(rpm -E %rhel).noarch.rpm
 yum -y install dnf
+dnf -y install --nogpgcheck https://mirrors.rpmfusion.org/free/el/rpmfusion-free-release-$(rpm -E %rhel).noarch.rpm https://mirrors.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-$(rpm -E %rhel).noarch.rpm
 dnf -y install git mercurial curl wget tar gcc gcc-c++ make libtool automake autoconf autogen pkgconfig cmake ca-certificates
 dnf -y install  bison flex gperf gettext texinfo texlive texlive-dejavu yasm nasm gtk-doc libtasn1-devel libstdc++-devel
 dnf -y install fontconfig-devel freetype-devel bzip2 bzip2-devel gmp-devel expat-devel libtool-ltdl-devel libunistring-devel gc-devel gettext-devel
@@ -17,13 +65,26 @@ dnf -y install libedit-devel libxo-devel meson ncurses-devel ninja-build dash e2
 dnf -y install docbook-simple docbook-slides docbook-utils-pdf gc-devel.i686 libstdc++-devel.i686 curl-devel glibc-static glibc-static.i686
 dnf -y install glibc-devel glibc-devel.i686 fftw-devel clang gcc-c++.i686 rubberband-devel
 dnf -y groupinstall 'Development Tools'
-
-#update install caro
+elif [[ "$OS" = "Fedora"  ]]; then
+dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+dnf -y install git mercurial curl wget tar gcc gcc-c++ make libtool automake autoconf autogen pkgconfig cmake ca-certificates
+dnf -y install  bison flex gperf gettext texinfo texlive texlive-dejavu yasm nasm gtk-doc libtasn1-devel libstdc++-devel
+dnf -y install fontconfig-devel freetype-devel bzip2 bzip2-devel gmp-devel expat-devel libtool-ltdl-devel libunistring-devel gc-devel gettext-devel
+dnf -y install zlib-devel librtmp-devel fdk-aac-devel nettle-devel openssl-devel unzip zip subversion byacc binutils-devel emacs-common-ess
+dnf -y install libedit-devel libxo-devel meson ncurses-devel ninja-build dash e2fsprogs-devel emacs-devel guile-devel
+dnf -y install docbook-simple docbook-slides docbook-utils-pdf gc-devel.i686 libstdc++-devel.i686 curl-devel glibc-static glibc-static.i686
+dnf -y install glibc-devel glibc-devel.i686 fftw-devel clang gcc-c++.i686 rubberband-devel
+dnf -y groupinstall 'Development Tools'
+elif [[ "$OS" = "Ubuntu" || "$OS" = "debian" ]]; then
+apt-get -y install libssl-dev g++-multilib git mercurial curl wget ca-certificates tar gcc g++ make libtool automake zstd nettle-dev
+apt-get -y install autoconf autogen build-essential pkg-config cmake bison flex gperf gettext autopoint texinfo texlive nasm yasm libunistring-dev
+apt-get -y install libfontconfig-dev libfreetype-dev libbz2-dev librubberband-dev libsamplerate0-dev libgmp-dev libltdl-dev
+apt-get -y install libffi-dev libgc-dev gtk-doc-tools libtasn1-6-dev libtasn1-bin librtmp-dev libfdk-aac-dev subversion
 apt-get -y purge cargo
-dnf -y remove cargo
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 source "$HOME/.cargo/env"
 rustup default stable
+fi
 
 set -u
 set -e
@@ -438,10 +499,10 @@ WD=$(pwd)
 SRC=$WD/src
 
 OUT_PREFIX=$WD/ffmpeg_build
-OUT_BIN=$WD/ffmpeg_bin
+OUT_BIN="$WD/ffmpeg_bin"
 OUT_PKG_CONFIG=$OUT_PREFIX/lib/pkgconfig:$OUT_PREFIX/lib64/pkgconfig
 
-export PATH="$OUT_BIN:$PATH"
+export PATH="$OUT_BIN:$OUT_PREFIX/bin:$PATH"
 export PKG_CONFIG_PATH=$OUT_PKG_CONFIG
 export CFLAGS="$CFLAGS -I$OUT_PREFIX/include -L$OUT_PREFIX/lib -L$OUT_PREFIX/lib64"
 export LD_LIBRARY_PATH="$OUT_PREFIX/lib:$OUT_PREFIX/lib64:$LD_LIBRARY_PATH"
@@ -579,8 +640,10 @@ dl_tar_bz2_fre()
 
 # compile_with_autogen   yasm --bindir=$OUT_BIN
 
+if [[ "$OS" = "Ubuntu" || "$OS" = "debian" ]]; then
 git_get_fresh rav1e https://github.com/xiph/rav1e.git
 compile_rav1e rav1e
+fi
 
 svn_clone_ie xavs https://svn.code.sf.net/p/xavs/code/trunk
 compile_with_configure xavs --bindir=$OUT_BIN --disable-shared
@@ -598,9 +661,13 @@ git_get_fresh libx264 http://git.videolan.org/git/x264.git
 compile_with_configure libx264 --bindir=$OUT_BIN --enable-static --enable-pic --bit-depth=all
 
 git_get_fresh libx265 https://bitbucket.org/multicoreware/x265_git.git
-#CFLAGS="$CFLAGS -static-libgcc" \
-#CXXFLAGS="$CXXFLAGS -static-libgcc -static-libstdc++" \
+if [[ "$OS" = "Ubuntu" || "$OS" = "debian" ]]; then
+CFLAGS="$CFLAGS -static-libgcc" \
+CXXFLAGS="$CXXFLAGS -static-libgcc -static-libstdc++" \
 compile_with_cmake_sp libx265 build/linux ../../source -DENABLE_SHARED:bool=off
+else
+compile_with_cmake_sp libx265 build/linux ../../source -DENABLE_SHARED:bool=off
+fi
 if [ ! -f $OUT_PREFIX/lib/pkgconfig/x265.pc ]
 then
 mkdir -p $OUT_PREFIX/lib/pkgconfig/
@@ -690,8 +757,14 @@ compile_with_bootstrap gnutls --bindir=$OUT_BIN --with-included-libtasn1 --with-
 git_get_fresh samplerate https://github.com/libsndfile/libsamplerate
 compile_with_cmake samplerate -DBUILD_SHARED_LIBS=OFF
 
+
+if [[ "$OS" = "Ubuntu" || "$OS" = "debian" ]]; then
+pp='--extra-cflags="-static -static-libgcc" --extra-cxxflags="-static -static-libgcc -static-libstdc++" --extra-ldexeflags="-static -static-libgcc -static-libstdc++"'
+else
 git_get_fresh libass https://github.com/libass/libass.git
 compile_libass libass
+pp="--enable-libass"
+fi
 
 dl_tar_bz2_fre ffmpeg https://ffmpeg.org/releases/ffmpeg-5.1.2.tar.bz2
 compile_with_configure ffmpeg \
@@ -704,9 +777,7 @@ compile_with_configure ffmpeg \
                        --extra-libs=-lfftw3 \
                        --extra-libs=-lsamplerate \
                        --extra-libs=-lstdc++ \
-                       --extra-cflags="-static -static-libgcc" \
-                       --extra-cxxflags="-static -static-libgcc -static-libstdc++" \
-                       --extra-ldexeflags="-static -static-libgcc -static-libstdc++" \
+                       $pp \
                        --enable-pthreads \
                        --enable-gpl \
                        --enable-libx264 \
