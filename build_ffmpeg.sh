@@ -63,7 +63,7 @@ dnf -y install fontconfig-devel freetype-devel bzip2 bzip2-devel gmp-devel expat
 dnf -y install zlib-devel librtmp-devel fdk-aac-devel nettle-devel openssl-devel unzip zip subversion byacc binutils-devel emacs-common-ess
 dnf -y install libedit-devel libxo-devel meson ncurses-devel ninja-build dash e2fsprogs-devel emacs-devel guile-devel
 dnf -y install docbook-simple docbook-slides docbook-utils-pdf gc-devel.i686 libstdc++-devel.i686 curl-devel glibc-static glibc-static.i686
-dnf -y install glibc-devel glibc-devel.i686 fftw-devel clang gcc-c++.i686 rubberband-devel
+dnf -y install glibc-devel glibc-devel.i686 fftw-devel gcc-c++.i686 rubberband-devel
 dnf -y groupinstall 'Development Tools'
 elif [[ "$OS" = "Fedora"  ]]; then
 dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
@@ -73,7 +73,7 @@ dnf -y install fontconfig-devel freetype-devel bzip2 bzip2-devel gmp-devel expat
 dnf -y install zlib-devel librtmp-devel fdk-aac-devel nettle-devel openssl-devel unzip zip subversion byacc binutils-devel emacs-common-ess
 dnf -y install libedit-devel libxo-devel meson ncurses-devel ninja-build dash e2fsprogs-devel emacs-devel guile-devel
 dnf -y install docbook-simple docbook-slides docbook-utils-pdf gc-devel.i686 libstdc++-devel.i686 curl-devel glibc-static glibc-static.i686
-dnf -y install glibc-devel glibc-devel.i686 fftw-devel clang gcc-c++.i686 rubberband-devel
+dnf -y install glibc-devel glibc-devel.i686 fftw-devel gcc-c++.i686 rubberband-devel
 dnf -y groupinstall 'Development Tools'
 elif [[ "$OS" = "Ubuntu" || "$OS" = "debian" ]]; then
 apt-get -y install libssl-dev g++-multilib git mercurial curl wget ca-certificates tar gcc g++ make libtool automake zstd nettle-dev
