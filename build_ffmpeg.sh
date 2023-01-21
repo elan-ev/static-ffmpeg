@@ -455,14 +455,14 @@ hash -r
 
 compile_alsa           alsa
 
-#compile_with_configure libx264 \
-#                       --bindir=$OUT_BIN \
-#                       --enable-static \
-#                       --enable-pic \
-#                       --bit-depth=all
+compile_with_configure libx264 \
+                       --bindir=$OUT_BIN \
+                       --enable-static \
+                       --enable-pic \
+                       --bit-depth=all
 
-#CFLAGS="$CFLAGS -static-libgcc" \
-#CXXFLAGS="$CXXFLAGS -static-libgcc -static-libstdc++" \
+CFLAGS="$CFLAGS -static-libgcc" \
+CXXFLAGS="$CXXFLAGS -static-libgcc -static-libstdc++" \
 compile_with_cmake_sp  libx265 build/linux ../../source \
                        -DENABLE_SHARED:bool=off
 if [ ! -f $OUT_PREFIX/lib/pkgconfig/x265.pc ]
@@ -488,33 +488,33 @@ compile_with_cmake_sp  libaom-av1 build .. \
 
 compile_svtav1         svt_av1
 
-#compile_rav1e          rav1e
+compile_rav1e          rav1e
 
-#compile_with_autogen   libopus \
-#                       --disable-shared
+compile_with_autogen   libopus \
+                       --disable-shared
 
 # compile libogg (dependency of libvorbis)
-#compile_with_autogen   libogg \
-#                       --disable-shared
+compile_with_autogen   libogg \
+                       --disable-shared
 
-#compile_with_autogen   libvorbis \
-#                       --with-ogg=$OUT_PREFIX \
-#                       --disable-shared
+compile_with_autogen   libvorbis \
+                       --with-ogg=$OUT_PREFIX \
+                       --disable-shared
 
-#compile_with_configure libvpx \
-#                       --disable-examples \
-#                       --disable-unit-tests \
-#                       --enable-vp9-highbitdepth \
-#                       --as=yasm
+compile_with_configure libvpx \
+                       --disable-examples \
+                       --disable-unit-tests \
+                       --enable-vp9-highbitdepth \
+                       --as=yasm
 
-#compile_with_configure lame \
-#                       --bindir=$OUT_BIN \
-#                       --disable-shared \
-#                       --enable-nasm
+compile_with_configure lame \
+                       --bindir=$OUT_BIN \
+                       --disable-shared \
+                       --enable-nasm
 
-#compile_with_autogen   fribidi \
-#                       --bindir=$OUT_BIN \
-#                       --disable-shared
+compile_with_autogen   fribidi \
+                       --bindir=$OUT_BIN \
+                       --disable-shared
 
 compile_with_cmake     libopenjpeg \
                        -DBUILD_SHARED_LIBS=OFF
@@ -528,16 +528,16 @@ compile_with_cmake     libsoxr \
 compile_with_autogen   libspeex \
                        --disable-shared
 
-#compile_with_autogen   libtheora \
-#                       --disable-shared
+compile_with_autogen   libtheora \
+                       --disable-shared
 
-#compile_with_config_sp xvidcore build/generic
+compile_with_config_sp xvidcore build/generic
 
 compile_with_cmake     libvidstab \
                        -DBUILD_SHARED_LIBS=OFF
 
-#compile_with_autogen   libwebp \
-#                       --disable-shared
+compile_with_autogen   libwebp \
+                       --disable-shared
 
 compile_with_cmake   frei0r
 
@@ -612,8 +612,8 @@ compile_with_configure ffmpeg \
                        --enable-runtime-cpudetect \
                        --enable-manpages \
                        --enable-nvenc \
+                       --enable-librav1e \
+                       --enable-libfribidi \
                        --enable-gnutls
 
 echo "DONE"
-#                       --enable-librav1e \
-#                       --enable-libfribidi \
