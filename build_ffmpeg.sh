@@ -574,6 +574,9 @@ dl_tar_bz2_fre()
 
 # compile_with_autogen   yasm --bindir=$OUT_BIN
 
+git_get_fresh rav1e https://github.com/xiph/rav1e.git
+compile_rav1e rav1e
+
 svn_clone_ie xavs https://svn.code.sf.net/p/xavs/code/trunk
 compile_with_configure xavs --bindir=$OUT_BIN --disable-shared
 
@@ -616,9 +619,6 @@ compile_with_cmake_sp libaom-av1 build .. -DBUILD_SHARED_LIBS=0
 
 git_get_fresh svt_av1 https://gitlab.com/AOMediaCodec/SVT-AV1.git
 compile_svtav1 svt_av1
-
-git_get_fresh rav1e https://github.com/xiph/rav1e.git
-compile_rav1e rav1e
 
 git_get_fresh libopus https://github.com/xiph/opus.git
 compile_with_autogen libopus --disable-shared
