@@ -698,7 +698,7 @@ compile_with_configure ffmpeg \
                        --bindir=$OUT_BIN \
                        --pkg-config-flags="--static" \
                        --extra-cflags="-I$OUT_PREFIX/include" \
-                       --extra-ldflags="-L$OUT_PREFIX/lib" \
+                       --extra-ldflags="-L$OUT_PREFIX/lib -L$OUT_PREFIX/lib64" \
                        --extra-libs=-lpthread \
                        --extra-libs=-lm \
                        --extra-libs=-lfftw3 \
