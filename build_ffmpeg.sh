@@ -12,7 +12,7 @@ yum -y install dnf
 dnf -y install git mercurial curl wget tar gcc gcc-c++ make libtool automake autoconf autogen pkgconfig cmake ca-certificates
 dnf -y install  bison flex gperf gettext texinfo texlive yasm nasm gtk-doc libtasn1-devel libstdc++-devel
 dnf -y install fontconfig-devel freetype-devel bzip2 bzip2-devel gmp-devel expat-devel libtool-ltdl-devel libunistring-devel gc-devel gettext-devel
-dnf -y install zlib-devel librtmp-devel fdk-aac-devel nettle-devel openssl-devel unzip zip subversion byacc
+dnf -y install zlib-devel librtmp-devel fdk-aac-devel nettle-devel openssl-devel unzip zip subversion byacc binutils-devel
 dnf -y groupinstall 'Development Tools'
 #update install caro
 apt-get -y purge cargo
