@@ -759,7 +759,7 @@ compile_with_cmake samplerate -DBUILD_SHARED_LIBS=OFF
 
 
 if [[ "$OS" = "Ubuntu" || "$OS" = "debian" ]]; then
-pp='--extra-cflags="-static -static-libgcc" --extra-cxxflags="-static -static-libgcc -static-libstdc++" --extra-ldexeflags="-static -static-libgcc -static-libstdc++"'
+pp='--extra-cflags="-static -static-libgcc" --extra-cxxflags="-static -static-libgcc -static-libstdc++" --extra-ldexeflags="-static -static-libgcc -static-libstdc++" --enable-librav1e'
 else
 git_get_fresh libass https://github.com/libass/libass.git
 compile_libass libass
