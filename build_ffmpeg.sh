@@ -406,7 +406,6 @@ if [ -d "$SRC/$1" ]; then
     echo "rav1e BUILD $1"
     RUST_BACKTRACE=1 PATH="$OUT_PREFIX/bin:$PATH" cargo build -j$(nproc --all) --release
     RUST_BACKTRACE=1 PATH="$OUT_PREFIX/bin:$PATH" cargo cinstall -j$(nproc --all) --release --prefix="$OUT_PREFIX"
-          --prefix="$OUT_PREFIX"
 
     echo "FIX rav1e.pc file" # Hack
     sed -i "s/ -lgcc_s / /g" "$OUT_PREFIX/lib/pkgconfig/rav1e.pc"
