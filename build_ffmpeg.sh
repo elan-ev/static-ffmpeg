@@ -13,6 +13,7 @@ dnf -y install git mercurial curl wget tar gcc gcc-c++ make libtool automake aut
 dnf -y install  bison flex gperf gettext texinfo texlive yasm nasm gtk-doc libtasn1-devel libstdc++-devel
 dnf -y install fontconfig-devel freetype-devel bzip2 bzip2-devel gmp-devel expat-devel libtool-ltdl-devel libunistring-devel gc-devel gettext-devel
 dnf -y install zlib-devel librtmp-devel fdk-aac-devel nettle-devel openssl-devel unzip zip subversion byacc
+dnf -y groupinstall 'Development Tools'
 #update install caro
 apt-get -y purge cargo
 dnf -y remove cargo
@@ -564,7 +565,7 @@ dl_tar_bz2_fre()
 
     curl -s -o tmp.tar.bz2 -L "$2"
     tar -xjf tmp.tar.bz2 --strip-components=1
-    rm tmp.tar.xz
+    rm tmp.tar.bz2
 
     cd $CURRENT_DIR
 }
@@ -744,15 +745,16 @@ compile_with_configure ffmpeg \
                        --enable-runtime-cpudetect \
                        --enable-librtmp \
                        --enable-static \
-					   --extra-libs='-lrtmp' --extra-libs='-lgmp'  \
-					   --extra-libs='-lssl' \
-					   --extra-libs='-lcrypto' \
-					   --extra-libs='-lz' \
-					   --extra-libs='-ldl' \
-					   --extra-libs='-lunistring' \
-					   --disable-debug \
-					   --disable-shared \
-					   --extra-version=Xtream-Codes \
+		       --extra-libs='-lrtmp'  \
+		       --extra-libs='-lgmp'  \
+		       --extra-libs='-lssl'  \
+		       --extra-libs='-lcrypto'  \
+		       --extra-libs='-lz'  \
+		       --extra-libs='-ldl'  \
+		       --extra-libs='-lunistring'  \
+		       --disable-debug  \
+		       --disable-shared  \
+		       --extra-version=Xtream-Codes \
                        --enable-libxavs
 
 
