@@ -589,8 +589,8 @@ git_get_fresh libx264 http://git.videolan.org/git/x264.git
 compile_with_configure libx264 --bindir=$OUT_BIN --enable-static --enable-pic --bit-depth=all
 
 git_get_fresh libx265 https://bitbucket.org/multicoreware/x265_git.git
-CFLAGS="$CFLAGS -static-libgcc" \
-CXXFLAGS="$CXXFLAGS -static-libgcc -static-libstdc++" \
+#CFLAGS="$CFLAGS -static-libgcc" \
+#CXXFLAGS="$CXXFLAGS -static-libgcc -static-libstdc++" \
 compile_with_cmake_sp libx265 build/linux ../../source -DENABLE_SHARED:bool=off
 if [ ! -f $OUT_PREFIX/lib/pkgconfig/x265.pc ]
 then
