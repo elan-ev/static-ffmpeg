@@ -496,7 +496,7 @@ svn_clone_ie() # subversion ssl no check
 
 git_get_submd()
 {
-    git_get_fresh $SRC/$1 $2
+    git_get_fresh $1 $2
 
     echo "SUBMODULES $1"
 
