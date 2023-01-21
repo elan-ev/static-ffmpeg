@@ -10,7 +10,7 @@ apt-get -y install libffi-dev libgc-dev gtk-doc-tools libtasn1-6-dev libtasn1-bi
 yum -y install epel-release
 yum -y install dnf
 dnf -y install git mercurial curl wget tar gcc gcc-c++ make libtool automake autoconf autogen pkgconfig cmake ca-certificates
-dnf -y install  bison flex gperf gettext texinfo texlive yasm nasm gtk-doc libtasn1-devel libstdc++-devel.i686 libstdc++-devel
+dnf -y install  bison flex gperf gettext texinfo texlive yasm nasm gtk-doc libtasn1-devel libstdc++-devel
 dnf -y install fontconfig-devel freetype-devel bzip2 bzip2-devel gmp-devel expat-devel libtool-ltdl-devel libunistring-devel gc-devel gettext-devel
 dnf -y install zlib-devel librtmp-devel fdk-aac-devel nettle-devel openssl-devel unzip zip subversion byacc
 #update install caro
