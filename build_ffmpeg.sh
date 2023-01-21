@@ -746,7 +746,6 @@ compile_with_configure ffmpeg \
                        --disable-ffplay \
                        --disable-doc \
                        --enable-gray \
-                       --enable-runtime-cpudetect \
                        --enable-librtmp \
                        --enable-static \
 		       --extra-libs='-lrtmp'  \
