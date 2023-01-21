@@ -81,7 +81,9 @@ apt-get -y install autoconf autogen build-essential pkg-config cmake bison flex 
 apt-get -y install libfontconfig-dev libfreetype-dev libbz2-dev librubberband-dev libsamplerate0-dev libgmp-dev libltdl-dev
 apt-get -y install libffi-dev libgc-dev gtk-doc-tools libtasn1-6-dev libtasn1-bin librtmp-dev libfdk-aac-dev subversion
 apt-get -y purge cargo
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+wget -O rustup-init.sh https://sh.rustup.rs
+chmod +x rustup-init.sh
+./rustup-init.sh -y
 source "$HOME/.cargo/env"
 rustup default stable
 fi
