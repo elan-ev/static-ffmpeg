@@ -738,10 +738,10 @@ compile_with_cmake frei0r
 git_get_fresh ffnvcodec https://git.videolan.org/git/ffmpeg/nv-codec-headers.git
 compile_ffnvcodec ffnvcodec
 
-# if nettle error uncomment for build
-# old system require example Centos 7
-#git_get_fresh nettle https://git.lysator.liu.se/nettle/nettle
-#compile_with_dot_bstrp nettle --bindir=$OUT_BIN --disable-shared
+if [[ "$OS" = "CentOs" ]] ; then
+git_get_fresh nettle https://git.lysator.liu.se/nettle/nettle
+compile_with_dot_bstrp nettle --bindir=$OUT_BIN --disable-shared
+fi
 
 # autogen for gnutls (autogen is not on alpine?)
 # as long as guile-3.0 is not supported by autogen, we cant use the system package
