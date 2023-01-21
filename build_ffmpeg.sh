@@ -457,7 +457,7 @@ cd $WD
 
 git_clone_ie()
 {
-    git clone --quiet $1 $SRC/$2 || true
+    git clone --quiet $1 $2 || true
 }
 
 git_get_fresh()
