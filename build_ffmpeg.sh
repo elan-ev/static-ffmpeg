@@ -84,6 +84,7 @@ apt-get -y purge cargo
 wget -O rustup-init.sh https://sh.rustup.rs
 chmod +x rustup-init.sh
 ./rustup-init.sh -y
+rm -f rustup-init.sh
 source "$HOME/.cargo/env"
 rustup default stable
 fi
