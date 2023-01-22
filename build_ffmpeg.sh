@@ -93,6 +93,27 @@ apt-get -y install libssl-dev g++-multilib git mercurial curl wget ca-certificat
 apt-get -y install autoconf autogen build-essential pkg-config cmake bison flex gperf gettext autopoint texinfo texlive nasm yasm libunistring-dev
 apt-get -y install libfontconfig-dev libfreetype-dev libbz2-dev librubberband-dev libsamplerate0-dev libgmp-dev libltdl-dev fftw3-dev
 apt-get -y install libffi-dev libgc-dev gtk-doc-tools libtasn1-6-dev libtasn1-bin librtmp-dev libfdk-aac-dev subversion
+apt-get -y install debhelper cdbs lintian build-essential fakeroot devscripts dh-make dput docbook-to-man
+if [[ "$OS" = "debian" ]]; then
+cd $SRC
+wget --no-check-certificate -O checkinstall_1.6.2+git20170426.d24a630.orig.tar.xz http://archive.ubuntu.com/ubuntu/pool/universe/c/checkinstall/checkinstall_1.6.2+git20170426.d24a630.orig.tar.xz
+wget -O checkinstall_1.6.2+git20170426.d24a630-2ubuntu2.debian.tar.xz http://archive.ubuntu.com/ubuntu/pool/universe/c/checkinstall/checkinstall_1.6.2+git20170426.d24a630-2ubuntu2.debian.tar.xz
+tar -xvf checkinstall_1.6.2+git20170426.d24a630.orig.tar.xz
+cd checkinstall
+tar -xvf ../checkinstall_1.6.2+git20170426.d24a630-2ubuntu2.debian.tar.xz
+debuild
+cd ..
+dpkg -i checkinstall*.deb
+apt-get update
+apt-get -yf install
+cd $SRC
+rm -rf *
+inst() {
+       dpkg-query --showformat='${Version}' --show "$1"
+    }
+else
+apt-get -y install checkinstall
+fi
 apt-get -y purge cargo
 wget -O rustup-init.sh https://sh.rustup.rs
 chmod +x rustup-init.sh
