@@ -53,6 +53,19 @@ else
 	echo "Debian 11 (Stable)"
     exit 1
 fi
+if [[ "$OS" = "CentOs" || "$OS" = "CentOS-Stream" ]]; then
+dist=el$VER
+pack=rpm
+elif [[ "$OS" = "Fedora" ]]; then
+dist=fc$VER
+pack=rpm
+elif [[ "$OS" = "Ubuntu" ]]; then
+dist=Ubuntu-$(lsb_release -sc)
+pack=debian
+elif [[ "$OS" = "debian" ]]; then
+dist=debian-$(lsb_release -sc)
+pack=debian
+fi
 if [[ "$OS" = "CentOs" || "$OS" = "CentOS-Stream" ]] ; then
 yum -y install --nogpgcheck https://dl.fedoraproject.org/pub/epel/epel-release-latest-$(rpm -E %rhel).noarch.rpm
 yum -y install dnf
@@ -500,6 +513,7 @@ echo "Building with ${CPU_CORES} parallel jobs"
 # set path vars
 WD=$(pwd)
 SRC=$WD/src
+DEB=$WD/deb
 
 OUT_PREFIX=$WD/ffmpeg_build
 OUT_BIN="$WD/ffmpeg_bin"
@@ -643,10 +657,17 @@ dl_tar_bz2_fre()
 
 # compile_with_autogen   yasm --bindir=$OUT_BIN
 
+
+if [ -f ""$DEB"/xtreamui-rav1e_$(date +%Y.%m)-1."$dist"_amd64.deb" ]; then
+dpkg -i ""$DEB"/deb/xtreamui-rav1e_$(date +%Y.%m)-1."$dist"_amd64.deb"
+else
 if [[ "$OS" = "Ubuntu" || "$OS" = "debian" ]]; then
 git_get_fresh rav1e https://github.com/xiph/rav1e.git
 compile_rav1e rav1e
 fi
+fi
+
+
 
 svn_clone_ie xavs https://svn.code.sf.net/p/xavs/code/trunk
 compile_with_configure xavs --bindir=$OUT_BIN --disable-shared
