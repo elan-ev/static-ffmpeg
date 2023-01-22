@@ -668,22 +668,57 @@ fi
 fi
 
 
-
+if [ -f ""$DEB"/xtreamui-xavs_$(date +%Y.%m)-1."$dist"_amd64.deb" ]; then
+dpkg -i ""$DEB"/xtreamui-xavs_$(date +%Y.%m)-1."$dist"_amd64.deb"
+else
 svn_clone_ie xavs https://svn.code.sf.net/p/xavs/code/trunk
 compile_with_configure xavs --bindir=$OUT_BIN --disable-shared
+fi
 
+if [ -f ""$DEB"/xtreamui-c2man_$(date +%Y.%m)-1."$dist"_amd64.deb" ]; then
+dpkg -i ""$DEB"/xtreamui-c2man_$(date +%Y.%m)-1."$dist"_amd64.deb"
+else
 git_get_fresh c2man https://github.com/fribidi/c2man.git
 compile_c2man c2man
+fi
 
 # update table
 hash -r
 
+if [ -f ""$DEB"/xtreamui-alsa_$(date +%Y.%m)-1."$dist"_amd64.deb" ]; then
+dpkg -i ""$DEB"/xtreamui-alsa_$(date +%Y.%m)-1."$dist"_amd64.deb"
+else
 git_get_fresh alsa https://github.com/alsa-project/alsa-lib.git
 compile_alsa alsa
+fi
 
+if [ -f ""$DEB"/xtreamui-x264_$(date +%Y.%m)-1."$dist"_amd64.deb" ]; then
+dpkg -i ""$DEB"/xtreamui-x264_$(date +%Y.%m)-1."$dist"_amd64.deb"
+else
 git_get_fresh libx264 http://git.videolan.org/git/x264.git
 compile_with_configure libx264 --bindir=$OUT_BIN --enable-static --enable-pic --bit-depth=all
+fi
 
+
+if [ -f ""$DEB"/xtreamui-x265_3.5-1."$dist"_amd64.deb" ]; then
+dpkg -i ""$DEB"/xtreamui-x265_3.5-1."$dist"_amd64.deb"
+if [ ! -f $OUT_PREFIX/lib64/pkgconfig/x265.pc ]
+then
+mkdir -p $OUT_PREFIX/lib64/pkgconfig/
+cat > $OUT_PREFIX/lib64/pkgconfig/x265.pc <<EOF
+prefix=$OUT_PREFIX
+exec_prefix=\${prefix}
+libdir=\${exec_prefix}/lib64
+includedir=\${prefix}/include
+Name: x265
+Description: H.265/HEVC video encoder
+Version: 3.5
+Libs: -L\${libdir} -lx265
+Libs.private: -lstdc++ -lm -lrt -ldl
+Cflags: -I\${includedir}
+EOF
+fi
+else
 git_get_fresh libx265 https://bitbucket.org/multicoreware/x265_git.git
 if [[ "$OS" = "Ubuntu" || "$OS" = "debian" ]]; then
 CFLAGS="-static-libgcc" \
@@ -709,9 +744,14 @@ Libs.private: -lstdc++ -lm -lrt -ldl
 Cflags: -I\${includedir}
 EOF
 fi
+fi
 
+if [ -f ""$DEB"/xtreamui-libaom-av1_$(date +%Y.%m)-1."$dist"_amd64.deb" ]; then
+dpkg -i ""$DEB"/xtreamui-libaom-av1_$(date +%Y.%m)-1."$dist"_amd64.deb"
+else
 git_get_fresh libaom-av1 https://aomedia.googlesource.com/aom
 compile_with_cmake_sp libaom-av1 build .. -DBUILD_SHARED_LIBS=0
+fi
 
 git_get_fresh svt_av1 https://gitlab.com/AOMediaCodec/SVT-AV1.git
 compile_svtav1 svt_av1
