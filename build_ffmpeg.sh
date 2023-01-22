@@ -78,7 +78,7 @@ dnf -y groupinstall 'Development Tools'
 elif [[ "$OS" = "Ubuntu" || "$OS" = "debian" ]]; then
 apt-get -y install libssl-dev g++-multilib git mercurial curl wget ca-certificates tar gcc g++ make libtool automake zstd nettle-dev
 apt-get -y install autoconf autogen build-essential pkg-config cmake bison flex gperf gettext autopoint texinfo texlive nasm yasm libunistring-dev
-apt-get -y install libfontconfig-dev libfreetype-dev libbz2-dev librubberband-dev libsamplerate0-dev libgmp-dev libltdl-dev
+apt-get -y install libfontconfig-dev libfreetype-dev libbz2-dev librubberband-dev libsamplerate0-dev libgmp-dev libltdl-dev fftw3-dev
 apt-get -y install libffi-dev libgc-dev gtk-doc-tools libtasn1-6-dev libtasn1-bin librtmp-dev libfdk-aac-dev subversion
 apt-get -y purge cargo
 wget -O rustup-init.sh https://sh.rustup.rs
@@ -595,7 +595,7 @@ dl_tar_gz_fre()
 
     curl -s -o tmp.tar.gz -L "$2"
     tar -xzf tmp.tar.gz --strip-components=1
-    rm tmp.tar.gz
+    rm -f tmp.tar.gz
 
     cd $CURRENT_DIR
 }
@@ -614,7 +614,7 @@ dl_tar_xz_fre()
 
     curl -s -o tmp.tar.xz -L "$2"
     tar -xJf tmp.tar.xz --strip-components=1
-    rm tmp.tar.xz
+    rm -f tmp.tar.xz
 
     cd $CURRENT_DIR
 }
@@ -633,7 +633,7 @@ dl_tar_bz2_fre()
 
     curl -s -o tmp.tar.bz2 -L "$2"
     tar -xjf tmp.tar.bz2 --strip-components=1
-    rm tmp.tar.bz2
+    rm -f tmp.tar.bz2
 
     cd $CURRENT_DIR
 }
@@ -761,15 +761,8 @@ git_get_fresh samplerate https://github.com/libsndfile/libsamplerate
 compile_with_cmake samplerate -DBUILD_SHARED_LIBS=OFF
 
 
-if [[ "$OS" = "Ubuntu" || "$OS" = "debian" ]]; then
-pp='--extra-cflags="-static -static-libgcc" --extra-cxxflags="-static -static-libgcc -static-libstdc++" --extra-ldexeflags="-static -static-libgcc -static-libstdc++" --enable-librav1e'
-else
-git_get_fresh libass https://github.com/libass/libass.git
-compile_libass libass
-pp="--enable-libass"
-fi
-
 dl_tar_bz2_fre ffmpeg https://ffmpeg.org/releases/ffmpeg-5.1.2.tar.bz2
+#if [[ "$OS" = "Ubuntu" || "$OS" = "debian" ]]; then
 compile_with_configure ffmpeg \
                        --bindir=$OUT_BIN \
                        --pkg-config-flags="--static" \
@@ -780,7 +773,10 @@ compile_with_configure ffmpeg \
                        --extra-libs=-lfftw3 \
                        --extra-libs=-lsamplerate \
                        --extra-libs=-lstdc++ \
-                       $pp \
+		       --extra-cflags="-static -static-libgcc" \
+		       --extra-cxxflags="-static -static-libgcc -static-libstdc++" \
+		       --extra-ldexeflags="-static -static-libgcc -static-libstdc++" \
+		       --enable-librav1e \
                        --enable-pthreads \
                        --enable-gpl \
                        --enable-libx264 \
@@ -833,6 +829,75 @@ compile_with_configure ffmpeg \
 		       --disable-shared  \
 		       --extra-version=Xtream-Codes \
                        --enable-libxavs
+		       
+else
+		       git_get_fresh libass https://github.com/libass/libass.git
+		       compile_libass libasscompile_with_configure ffmpeg \
+                       --bindir=$OUT_BIN \
+                       --pkg-config-flags="--static" \
+                       --extra-cflags="-I$OUT_PREFIX/include" \
+                       --extra-ldflags="-L$OUT_PREFIX/lib -L$OUT_PREFIX/lib64" \
+                       --extra-libs=-lpthread \
+                       --extra-libs=-lm \
+                       --extra-libs=-lfftw3 \
+                       --extra-libs=-lsamplerate \
+                       --extra-libs=-lstdc++ \
+		       --enable-libass \
+                       --enable-pthreads \
+                       --enable-gpl \
+                       --enable-libx264 \
+                       --enable-libx265 \
+                       --enable-libopus \
+                       --enable-libvorbis \
+                       --enable-libvpx \
+                       --enable-libmp3lame \
+                       --enable-fontconfig \
+                       --enable-libopenjpeg \
+                       --enable-libspeex \
+                       --enable-libaom \
+                       --enable-libsvtav1 \
+                       --enable-network \
+                       --enable-libtheora \
+                       --enable-libsoxr \
+                       --enable-libxvid \
+                       --enable-libvidstab \
+                       --enable-libwebp \
+                       --enable-libfreetype \
+                       --enable-frei0r \
+                       --enable-librubberband \
+                       --enable-avfilter \
+                       --enable-bzlib \
+                       --enable-zlib \
+                       --enable-hardcoded-tables \
+                       --enable-iconv \
+                       --enable-postproc \
+                       --disable-debug \
+                       --enable-runtime-cpudetect \
+                       --enable-manpages \
+                       --enable-nvenc \
+                       --enable-gnutls \
+                       --enable-nonfree \
+                       --enable-version3 \
+                       --enable-libfdk_aac \
+                       --disable-ffplay \
+                       --disable-doc \
+                       --enable-gray \
+                       --enable-librtmp \
+                       --enable-static \
+		       --extra-libs='-lrtmp'  \
+		       --extra-libs='-lgmp'  \
+		       --extra-libs='-lssl'  \
+		       --extra-libs='-lcrypto'  \
+		       --extra-libs='-lz'  \
+		       --extra-libs='-ldl'  \
+		       --extra-libs='-lunistring'  \
+		       --disable-debug  \
+		       --disable-shared  \
+		       --extra-version=Xtream-Codes \
+                       --enable-libxavs
+fi
+
+
 
 
 echo "DONE"
