@@ -665,8 +665,8 @@ compile_with_configure libx264 --bindir=$OUT_BIN --enable-static --enable-pic --
 
 git_get_fresh libx265 https://bitbucket.org/multicoreware/x265_git.git
 if [[ "$OS" = "Ubuntu" || "$OS" = "debian" ]]; then
-CFLAGS="$CFLAGS -static-libgcc" \
-CXXFLAGS="$CXXFLAGS -static-libgcc -static-libstdc++" \
+CFLAGS="-static-libgcc" \
+CXXFLAGS="-static-libgcc -static-libstdc++" \
 compile_with_cmake_sp libx265 build/linux ../../source -DENABLE_SHARED:bool=off
 else
 compile_with_cmake_sp libx265 build/linux ../../source -DENABLE_SHARED:bool=off
