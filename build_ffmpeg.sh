@@ -659,7 +659,7 @@ dl_tar_bz2_fre()
 
 
 if [ -f ""$DEB"/xtreamui-rav1e_$(date +%Y.%m)-1."$dist"_amd64.deb" ]; then
-dpkg -i ""$DEB"/deb/xtreamui-rav1e_$(date +%Y.%m)-1."$dist"_amd64.deb"
+dpkg -i ""$DEB"/xtreamui-rav1e_$(date +%Y.%m)-1."$dist"_amd64.deb"
 else
 if [[ "$OS" = "Ubuntu" || "$OS" = "debian" ]]; then
 git_get_fresh rav1e https://github.com/xiph/rav1e.git
